@@ -1,0 +1,32 @@
+import numpy
+from numpy.random import randn
+def mirsky(n):
+    #Generate Random nxn Matrices X and Y
+    X = randn(n,n)
+    Y = randn(n,n)
+    #Calculate the Left Hand Side of the Inequality
+    uX, sX, vhX = numpy.linalg.svd(X)
+    uY, sY, vhY = numpy.linalg.svd(Y)
+    i=1
+    sum = 0
+    r = range(1, n)
+    for i in r[:]:
+        a = sX[i]-sY[i]
+        sum = sum +abs(a)    
+        i += 1
+        
+    #Calculate the Right Hand Side of the Inequality
+    D = numpy.subtract(X,Y)
+    uD, sD, vhD = numpy.linalg.svd(D)
+    sumD = 0
+    j=1
+    for j in r[:]:
+        sumD = sumD + sD[j]
+        j += 1
+    if sum <= sumD:
+        print("The Mirksy Inequality is Satisfied")
+    else:
+        print("The Mirksy Inequality is not Satisfied")
+        
+    
+    return;
