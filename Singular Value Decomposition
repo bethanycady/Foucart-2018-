@@ -1,0 +1,49 @@
+import numpy
+from numpy import identity, zeros, dot
+from numpy.random import randn
+from numpy.linalg import norm
+
+#Creating a random matrix M
+m = numpy.random.randint(2,100)
+n = numpy.random.randint(2,100)
+M = randn(m,n)
+u, s, vh = numpy.linalg.svd(M)
+u.shape, s.shape, vh.shape
+
+#Confirm u is unitary
+#If the calculated norm is sufficiently close to 0, u is unitary.
+uc=numpy.conjugate(u)
+uh = numpy.transpose(uc) #uh = conjugate transpose
+I = identity(m)
+norm(uh@u-I)
+
+#Confirm the elements of Σ are non-negative
+i = 0
+while i<m:
+    if s[i]>=0:
+        i +=1
+    else:
+        print("There exist non-negative values in Σ")
+        break
+    if i == 7:
+        print("All values of Σ are non-negative")
+        break
+        
+#Confirm vh is is unitary 
+#If the calculated norm is sufficiently close to 0, vh is unitary.
+vhc=numpy.conjugate(vh)
+v = numpy.transpose(vhc) #vhh = conjugate transpose
+I = identity(n)
+norm(v@vh-I)
+
+#Check that u, Σ, and vh are factors components of M
+S = (m,n)
+S = zeros(S)
+#This step is to assure dimension conformity
+if m > n:
+    S[:n,:n] = numpy.diag(s)
+    B = dot(dot(u, S), vh)
+elif m<n:
+    S[:m,:m] = numpy.diag(s)
+    B = dot(dot(S, u), vh)
+norm(M-B)
