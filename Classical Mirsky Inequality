@@ -1,3 +1,10 @@
+#Classical Mirksy Inequality - Foucart (2018)
+
+#This module establishes the Classical Mirsky Inequality in which the paper relies. 
+#The inequality states that for complex square matrices X, Y and A = X-Y, 
+#the sum of the differences of indexed singular values of X and Y is less than or equal 
+#to the sum of singular values of A.
+
 import numpy
 from numpy.random import randn
 def mirsky(n):
