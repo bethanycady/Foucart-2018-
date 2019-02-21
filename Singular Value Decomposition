@@ -1,3 +1,10 @@
+#This module explores the existence of singular value decomposition of a random m x n matrix M. 
+#The theorem states that for any M can be factorized into three distinct parts: 
+# >A unitary m x m matrix U
+# >An m x n rectangular diagonal matrix Σ
+# >A unitary n x n matrix Vh, where Vh is the conjugate transpose of some unitary V. 
+#This factorization is summarized in the formula M = UΣVh
+
 import numpy
 from numpy import identity, zeros, dot
 from numpy.random import randn
